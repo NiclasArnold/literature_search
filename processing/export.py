@@ -2,6 +2,7 @@ import os
 import re
 import requests
 import pandas as pd
+from datetime import datetime
 
 def generate_key(paper):
     authors = paper.get("authors", "")
@@ -35,7 +36,10 @@ def make_unique_keys(papers):
 
 def save_csv(papers, output_dir):
     os.makedirs(output_dir, exist_ok=True)
-    path = os.path.join(output_dir, "papers.csv")
+
+    today = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    path = os.path.join(output_dir, f"search_{today}.csv")
+
     df = pd.DataFrame(papers)
     df.to_csv(path, index=False, encoding="utf-8")
 

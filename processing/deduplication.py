@@ -4,8 +4,8 @@ def deduplicate(papers):
     unique = []
 
     for paper in papers:
-        doi = paper.get("doi", "").strip().lower()
-        title = paper.get("title", "").strip().lower()
+        doi = (paper.get("doi") or "").strip().lower()
+        title = (paper.get("title") or "").strip().lower()
 
         if doi:
             if doi in seen_dois:
